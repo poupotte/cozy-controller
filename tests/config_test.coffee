@@ -121,7 +121,10 @@ describe "Configuration", ->
 
             it "Then stack file should contains data-system information", ->
                 data = fs.readFileSync "/usr/local/cozy/apps/stack.json", 'utf8'
+                console.log data
                 data = JSON.parse(data)
+                console.log 'data : '
+                console.log data
                 should.exist data['data-system']
 
             it "And I stopped server", (done) ->

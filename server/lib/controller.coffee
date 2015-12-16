@@ -33,6 +33,7 @@ stackApps = ['home', 'data-system', 'proxy']
         * add application in drones and running
 ###
 startApp = (app, callback) ->
+    console.log "startApp"
     # Start Application
     if running[app.name]?
         # Check if an application with same already exists
@@ -44,6 +45,7 @@ startApp = (app, callback) ->
             callback null, app
         else
             # Start application (with spawner)
+            console.log 'spawner'
             spawner.start app, (err, result) ->
                 if err?
                     callback err
@@ -57,8 +59,10 @@ startApp = (app, callback) ->
                     # If app is an stack application,
                     # we store this manifest in stack.json
                     if app.name in stackApps
-                        stack.addApp app
-                    callback null, result
+                        stack.addApp app, (err) ->
+                            callback null, result
+                    else
+                        callback null, result
 
 ###
     Stop all applications in tab <apps>

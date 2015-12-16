@@ -109,6 +109,8 @@ module.exports.start = (app, callback) ->
 
     #foreverOptions.command = 'coffee'
     fs.readFile "#{app.dir}/package.json", 'utf8', (err, data) ->
+        console.log "manifest"
+        console.log data
         try
             data = JSON.parse(data)
         catch
@@ -145,8 +147,10 @@ module.exports.start = (app, callback) ->
             fs.rename app.logFile, app.backup
             fs.rename app.errFile, app.backupErr
             fs.readFile app.backupErr, 'utf8', (err, data) ->
+                console.log 'err file :'
                 console.log data
             fs.readFile app.backup, 'utf8', (err, data) ->
+                console.log 'data file: '
                 console.log data
             # Remove listeners to related events.
             appliProcess.removeListener 'error', onError

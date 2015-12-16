@@ -110,8 +110,6 @@ describe "Configuration", ->
                     repository:
                         url: "https://github.com/cozy/cozy-data-system.git"
                         type: "git"
-                    scripts:
-                        start: "server.coffee"
                 client.post 'apps/data-system/install', "start":app, (err, res, body) =>
                     console.log body
                     @res = res

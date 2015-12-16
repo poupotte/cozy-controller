@@ -17,7 +17,9 @@ module.exports.start = (app, callback) ->
     
     # Generate token
     if app.name in ["home", "proxy", "data-system"]
+        console.log "spawner, pwd"
         pwd = token.get()
+        console.log pwd
     else
         pwd = app.password
 

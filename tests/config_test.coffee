@@ -113,6 +113,7 @@ describe "Configuration", ->
                     scripts:
                         start: "server.coffee"
                 client.post 'apps/data-system/install', "start":app, (err, res, body) =>
+                    console.log body
                     @res = res
                     @port = body.drone.port
                     dsPort = @port

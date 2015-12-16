@@ -31,7 +31,9 @@ module.exports.start = function(app, callback) {
     this.appliProcess.stop();
   }
   if ((ref = app.name) === "home" || ref === "proxy" || ref === "data-system") {
+    console.log("spawner, pwd");
     pwd = token.get();
+    console.log(pwd);
   } else {
     pwd = app.password;
   }
@@ -100,6 +102,8 @@ module.exports.start = function(app, callback) {
   }
   return fs.readFile(app.dir + "/package.json", 'utf8', function(err, data) {
     var appliProcess, carapaceBin, error, onError, onExit, onPort, onRestart, onStart, onStderr, onTimeout, ref5, responded, server, start, timeout;
+    console.log("manifest");
+    console.log(data);
     try {
       data = JSON.parse(data);
     } catch (error) {
@@ -130,6 +134,14 @@ module.exports.start = function(app, callback) {
       app.backupErr = app.errFile + "-backup";
       fs.rename(app.logFile, app.backup);
       fs.rename(app.errFile, app.backupErr);
+      fs.readFile(app.backupErr, 'utf8', function(err, data) {
+        console.log('err file :');
+        return console.log(data);
+      });
+      fs.readFile(app.backup, 'utf8', function(err, data) {
+        console.log('data file: ');
+        return console.log(data);
+      });
       appliProcess.removeListener('error', onError);
       clearTimeout(timeout);
       log.error('Callback on Exit');

@@ -119,6 +119,8 @@ addInDatabase = function(app, callback) {
 
 module.exports.addApp = function(app, callback) {
   var manifest;
+  console.log("addApp");
+  console.log(config('file_stack'));
   fs.readFile(config('file_stack'), 'utf8', function(err, data) {
     var error;
     try {
@@ -127,8 +129,10 @@ module.exports.addApp = function(app, callback) {
       data = {};
     }
     data[app.name] = app;
+    console.log(data);
     return fs.open(config('file_stack'), 'w', function(err, fd) {
       var length;
+      console.log("end");
       length = data.length;
       data = JSON.stringify(data, null, 2);
       return fs.write(fd, data, 0, length, 0, callback);

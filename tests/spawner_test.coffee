@@ -69,8 +69,10 @@ describe "Spawner", ->
                 fs.existsSync(config('file_token')).should.be.ok
 
             it "And data-system has been added in stack.json", ->
+                console.log config('file_stack')
                 fs.existsSync(config('file_stack')).should.be.ok
                 stack = fs.readFileSync(config('file_stack'), 'utf8')
+                console.log stack
                 exist = stack.indexOf 'data-system'
                 exist.should.not.equal -1
 

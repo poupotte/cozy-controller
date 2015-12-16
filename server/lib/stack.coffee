@@ -88,13 +88,17 @@ addInDatabase = (app, callback) ->
 ###
 module.exports.addApp = (app, callback) ->
     # Store in stack.json
+    console.log "addApp"
+    console.log config('file_stack')
     fs.readFile config('file_stack'), 'utf8', (err, data) ->
         try
             data = JSON.parse data
         catch
             data = {}
         data[app.name] = app
+        console.log data
         fs.open config('file_stack'), 'w', (err, fd) ->
+            console.log "end"
             length = data.length
             data = JSON.stringify(data, null, 2)
             fs.write fd, data, 0, length, 0, callback

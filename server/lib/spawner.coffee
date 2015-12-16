@@ -146,6 +146,8 @@ module.exports.start = (app, callback) ->
             fs.rename app.errFile, app.backupErr
             fs.readFile app.backupErr, 'utf8', (err, data) ->
                 console.log data
+            fs.readFile app.backup, 'utf8', (err, data) ->
+                console.log data
             # Remove listeners to related events.
             appliProcess.removeListener 'error', onError
             clearTimeout timeout
